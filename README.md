@@ -7,13 +7,13 @@ Before installing Kubeflow, check your Kubernetes environment.
 ### Cluster node status
 Check the status of the K8s cluster node as STATUS with the command `$ kubectl get nodes`.
   
-  | NAME | ROLES | STATUS | VERSION | OS | KERNEL-VERSION | CONTAINER-RUNTIME |
-  | ---------- | ------ | ------ | ------- | ------------------ | ----------------- | ----------------- |
-  | k8s-master | master | Ready | v1.15.3 | Ubuntu 18.04.3 LTS | 4.15.0-74-generic | docker: //19.3.5 |
-  | k8s-node1 | master | Ready | v1.15.3 | Ubuntu 18.04.3 LTS | 4.15.0-76-generic | docker: //19.3.5 |
-  | k8s-node2 | master | Ready | v1.15.3 | Ubuntu 18.04.3 LTS | 4.15.0-76-generic | docker: //19.3.5 |
-  | k8s-node3 | worker | Ready | v1.15.3 | Ubuntu 18.04.3 LTS | 4.15.0-76-generic | docker: //19.3.5 |
-  | k8s-node4 | worker | Ready | v1.15.3 | Ubuntu 18.04.3 LTS | 4.15.0-76-generic | docker: //19.3.5 |
+| NAME | ROLES | STATUS | VERSION | OS | KERNEL-VERSION | CONTAINER-RUNTIME |
+| ---------- | ------ | ------ | ------- | ------------------ | ----------------- | ----------------- |
+| k8s-master | master | Ready | v1.15.3 | Ubuntu 18.04.3 LTS | 4.15.0-74-generic | docker: //19.3.5 |
+| k8s-node1 | master | Ready | v1.15.3 | Ubuntu 18.04.3 LTS | 4.15.0-76-generic | docker: //19.3.5 |
+| k8s-node2 | master | Ready | v1.15.3 | Ubuntu 18.04.3 LTS | 4.15.0-76-generic | docker: //19.3.5 |
+| k8s-node3 | worker | Ready | v1.15.3 | Ubuntu 18.04.3 LTS | 4.15.0-76-generic | docker: //19.3.5 |
+| k8s-node4 | worker | Ready | v1.15.3 | Ubuntu 18.04.3 LTS | 4.15.0-76-generic | docker: //19.3.5 |
 
 ### Storage class default setting
 When entering the `$ kubectl get storageclass` or `$ kubectl get sc` command, check the `(default)` display in the NAME column.  
@@ -29,7 +29,7 @@ rook-ceph-block (default) rook-ceph.rbd.csi.ceph.com 6d18h
 ## Kubeflow preferences
 Follow the steps below to move the Kubeflow CLI (kfctl) and set environment variables.
 
-### Move the kfctl executable from the unzipped folder to / usr / bin.
+### Move the kfctl executable from the unzipped folder to /usr/bin.
 ```bash
 $ cp kfctl /usr/bin
 ```
@@ -40,7 +40,7 @@ $ vi ~ /.bashrc
 # .bashrc
 export KF_NAME = my-kubeflow #Can be modified.
 export BASE_DIR = /root/kubeflow #Can be modified
-export KF_DIR = $ {BASE_DIR}/${KF_NAME}
+export KF_DIR = ${BASE_DIR}/${KF_NAME}
 export CONFIG_FILE = ${KF_DIR}/kfctl_k8s_istio.0.7.1.yaml
 ```
 > *(Note)*
@@ -50,14 +50,14 @@ export CONFIG_FILE = ${KF_DIR}/kfctl_k8s_istio.0.7.1.yaml
 > * `CONFIG_FILE`: Configuration YAML file to be used to deploy Kubeflow.
 
 ## (optional) Push image needed to install kubeflow
-Push the image tar needed for Kubeflow installation in the private docker registry. Access the `imageLoader` executable file in` $ BASE_DIR / images / imageLoader` and add a registry.  
+Push the image tar needed for Kubeflow installation in the private docker registry. Access the `imageLoader` executable file in` $BASE_DIR/images/imageLoader` and add a registry.  
 
-> Note: **When executing the push command, there must be no image with the image tag <none> through docker images.**
+> Note: **When executing the push command, there must be no image with the image tag `<none>` through docker images.**
 ```bash
 $ cd $BASE_DIR/images/imageLoader
 $ vi imageLoader
 $ tar -xvf images.tar
-# registry = {registry_ip}: {registry_port}
+#registry = {registry_ip}:{registry_port}
 $ ./imageLoader push
 ```
 > *For more information, check the contents of [https://github.com/jx2lee/kubeflow-image-loader](https://github.com/jx2lee/kubeflow-image-loader).*
@@ -68,13 +68,13 @@ Follow the steps below to modify and deploy the YAML file in $KF_DIR(`/root/kube
 ### kfctl_k8s_istio.0.7.1.yaml file fix
 Access to vim and change the `uri: {BASE_DIR}` part to path with the `$ echo $BASE_DIR` command.  
 ```bash
-$ vi my-kubeflow / kfctl_k8s_istio.0.7.1.yaml
-# kfctl_k8s_istio.0.7.1.yaml
+$ vi my-kubeflow/kfctl_k8s_istio.0.7.1.yaml
+#kfctl_k8s_istio.0.7.1.yaml
 ...
 ...
 -name: manifests
   #uri: https://github.com/kubeflow/manifests/archive/v0.7-branch.tar.gz
-  uri: $ {BASE_DIR} /v0.7-branch.tar.gz # modify {BASE_DIR}
+  uri: $ {BASE_DIR}/v0.7-branch.tar.gz # modify {BASE_DIR}
 version: v0.7.1
 ```
 
@@ -88,26 +88,27 @@ $ ./sed.sh {registry IP}:{registry Port}
   
 ## Confirm Kubeflow startup
 ### `http://{NODE_IP}:31380` After connecting, check if Namespaces creation screen appears.
-If the Namespace creation screen does not appear, delete the `.cache` folder in the `${KF_DIR}`directory and reinstall it with the command `$ kfctl apply -V -f $ {CONFIG_FILE}`.
+If the Namespace creation screen does not appear, delete the `.cache` folder in the `${KF_DIR}`directory and reinstall it with the command `$ kfctl apply -V -f ${CONFIG_FILE}`.
 
 ## Delete Kubeflow
 
 To delete Kubeflow, use the `kfctl delete` command below.
 ```bash
 $ cd $ {KF_DIR}
-$ kfctl delete -f $ {CONFIG_FILE}
+$ kfctl delete -f ${CONFIG_FILE}
 ```
 
 - After executing the command, check if all resources in the namespace have been deleted.
   
   ```bash
   $ kubectl get all -n kubeflow
-  No resources found.
+  No resources found.
   ```
 
-- Delete all installed Kubeflow related resources using the clean-kubeflow.sh executable file in $ {BASE_DIR} / trouble-shoot.
+- Delete all installed Kubeflow related resources using the clean-kubeflow.sh executable file in` ${BASE_DIR}/utils`.
 
-  `$. / clean-kubeflow.sh`
+  `$ ./clean-kubeflow.sh`
+
 
 ---
 made by *jaejun.lee*

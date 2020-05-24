@@ -92,23 +92,22 @@ If the Namespace creation screen does not appear, delete the `.cache` folder in 
 
 ## Delete Kubeflow
 
-To delete Kubeflow, use the `kfctl delete` command below.
+To delete Kubeflow, use the `kfctl delete` command below.  
 ```bash
 $ cd $ {KF_DIR}
 $ kfctl delete -f ${CONFIG_FILE}
 ```
 
-- After executing the command, check if all resources in the namespace have been deleted.
-  
-  ```bash
-  $ kubectl get all -n kubeflow
-  No resources found.
-  ```
+- After executing the command, check if all resources in the namespace have been deleted.  
+```bash
+$ kubectl get all -n kubeflow
+No resources found.
+```
 
 - Delete all installed Kubeflow related resources using the clean-kubeflow.sh executable file in` ${BASE_DIR}/utils`.
-
-  `$ ./clean-kubeflow.sh`
-
+```bash
+$ ./clean-kubeflow.sh
+```
 
 ---
 made by *jaejun.lee*

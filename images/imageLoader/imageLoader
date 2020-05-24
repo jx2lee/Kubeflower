@@ -1,0 +1,91 @@
+#!/bin/bash
+# Fri, 18.05.2020
+# jaejun.lee.1991@gmail.com
+
+registry=
+
+function check_env() {
+  if [ $(docker images | awk '{print $2}' | grep "<none>" | wc -l) -ne 0 ];then
+    echo "You should delete image having <none> tag! exists $(docker images | awk '{print $2}' | grep "<none>" | wc -l) <none> tag image.."
+    exit 1
+  fi
+
+}
+
+function pull_images() {
+
+  image_list=.imageList
+  repo_list=$(awk '{print $1}' ${image_list})
+  for repo in $repo_list;do
+      name=${repo%:*}
+      version=${repo##*:}
+      echo "[ REPO ] $repo" | grep "REPO" --color
+      docker pull $repo
+      docker save $repo > "./tars/${repo##*/}.tar"
+      docker rmi -f $repo
+  done
+
+  image_list=.imageListHash
+  repo_list=$(awk '{print $1}' ${image_list})
+  for repo in $repo_list;do
+      name=${repo%@sha256:*}
+      version=${repo##*:}
+      echo "[ REPO ] $repo" | grep "REPO" --color
+      docker pull $repo
+      imageId=$(docker images | grep $name | awk '{print $3}')
+      echo "[ IMAGE-ID] $imageId" | grep "IMAGE_ID" --color
+      docker tag $imageId ${name}:${version}
+      docker save $repo > "./tars/${repo##*/}.tar"
+      docker rmi -f $imageId
+  done
+
+}
+
+function push_images() {
+
+  image_list=.imageList
+  repo_list=$(awk '{print $1}' ${image_list})
+  for repo in $repo_list;do
+      echo "[PUSH IMAGE] $repo" | grep "PUSH IMAGE" --color
+      image_name=${repo##*/}
+      docker load < "./tars/${image_name/%:/_}.tar"
+      docker tag ${repo} ${registry}/${repo}
+      docker push ${registry}/${repo}
+      docker rmi -f ${repo} && docker rmi -f ${registry}/${repo}
+  done
+
+  image_list=.imageListHash
+  repo_list=$(awk '{print $1}' ${image_list})
+  for repo in $repo_list;do
+    name=${repo%@sha256:*}
+    version=${repo##*:}
+    echo "[PUSH IMAGE] $repo" | grep "PUSH IMAGE" --color
+    docker load < "./tars/${repo##*/}.tar"
+    imageId=$(docker images | grep "<none>" | awk '{print $3}')
+    docker tag ${imageId} ${registry}/${name}:${version}
+    docker push ${registry}/${name}:${version}
+    docker rmi -f ${imageId}
+done
+
+}
+
+function main() {
+  case "${1:-}" in
+  pull)
+    check_env
+    pull_images
+    ;;
+  push)
+    check_env
+    push_images
+    ;;
+  *)
+    set +x
+    echo "usage:" >&2
+    echo "    $0 pull" >&2
+    echo "    $0 push" >&2
+    ;;
+  esac
+}
+
+main $1

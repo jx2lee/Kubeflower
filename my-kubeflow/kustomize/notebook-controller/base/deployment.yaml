@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+spec:
+  template:
+    spec:
+      containers:
+      - name: manager
+        image: @@DOCKER_REGISTRY@@/gcr.io/kubeflow-images-public/notebook-controller:6490f737000bd1d2520ac4b8cbde2b09749cdb291b1967ddda95d05131db49db
+        command:
+          - /manager
+        env:
+          - name: USE_ISTIO
+            value: "false"
+          - name: POD_LABELS
+            value: $(POD_LABELS)
+        imagePullPolicy: Always
+      serviceAccountName: service-account

@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - command:
+        - /manager
+        args:
+        - "-userid-header"
+        - $(userid-header)
+        - "-userid-prefix"
+        - $(userid-prefix)
+        - "-workload-identity"
+        - $(gcp-sa)
+        image: @@DOCKER_REGISTRY@@/gcr.io/kubeflow-images-public/profile-controller:e601b2226e534a4f8e0722cfc44ae4a919a90265c4c6c9e7a7a55fcb57032f25
+        imagePullPolicy: Always
+        name: manager
+      - command:
+        - /opt/kubeflow/access-management
+        args:
+        - "-cluster-admin"
+        - $(admin)
+        - "-userid-header"
+        - $(userid-header)
+        - "-userid-prefix"
+        - $(userid-prefix)
+        image: @@DOCKER_REGISTRY@@/gcr.io/kubeflow-images-public/kfam:3b0d4be7e59a3fa5ed1d80dccc832312caa94f3b2d36682524d3afc4e45164f0
+        imagePullPolicy: Always
+        name: kfam
+      serviceAccountName: controller-service-account

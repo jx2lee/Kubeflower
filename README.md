@@ -19,7 +19,7 @@ Check the status of the K8s cluster node as STATUS with the command `$ kubectl g
 When entering the `$ kubectl get storageclass` or `$ kubectl get sc` command, check the `(default)` display in the NAME column.  
 Storageclass exists, but if there is no "(default)" mark, define the default storage class with the following command.  
 ```bash
-$ kubectl patch storageclass {Storage class name} -p '{"metadata": {"annotations": {"storageclass.kubernetes.iis-default-class":"true"}}}'
+$ kubectl patch storageclass {Storage class name} -p '{"metadata":{"annotations":{"storageclass.kubernetes.iis-default-class":"true"}}}'
 $ kubectl get storageclass
 NAME PROVISIONER AGE
 csi-cephfs-sc rook-ceph.cephfs.csi.ceph.com 6d18h
@@ -38,10 +38,10 @@ $ cp kfctl /usr/bin
 ```bash
 $ vi ~ /.bashrc
 # .bashrc
-export KF_NAME = my-kubeflow #Can be modified.
-export BASE_DIR = /root/kubeflow #Can be modified
-export KF_DIR = ${BASE_DIR}/${KF_NAME}
-export CONFIG_FILE = ${KF_DIR}/kfctl_k8s_istio.0.7.1.yaml
+export KF_NAME=my-kubeflow #Can be modified.
+export BASE_DIR=/root/kubeflow #Can be modified
+export KF_DIR=${BASE_DIR}/${KF_NAME}
+export CONFIG_FILE=${KF_DIR}/kfctl_k8s_istio.0.7.1.yaml
 ```
 > *(Note)*
 > * `KF_NAME`: Name of the Kubeflow deployment, specifying a custom deployment name.
@@ -57,7 +57,7 @@ Push the image tar needed for Kubeflow installation in the private docker regist
 $ cd $BASE_DIR/images/imageLoader
 $ vi imageLoader
 $ tar -xvf images.tar
-#registry = {registry_ip}:{registry_port}
+#registry={registry_ip}:{registry_port}
 $ ./imageLoader push
 ```
 > *For more information, check the contents of [https://github.com/jx2lee/kubeflow-image-loader](https://github.com/jx2lee/kubeflow-image-loader).*
@@ -94,7 +94,7 @@ If the Namespace creation screen does not appear, delete the `.cache` folder in 
 
 To delete Kubeflow, use the `kfctl delete` command below.  
 ```bash
-$ cd $ {KF_DIR}
+$ cd ${KF_DIR}
 $ kfctl delete -f ${CONFIG_FILE}
 ```
 

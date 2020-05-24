@@ -1,4 +1,4 @@
-# Kubeflow installation-closed network
+# Kubeflow installation-closed network (Ver0.7.1)
 This is repo How to install Kubeflow in a Kubernetes cluster environment (closed network).
 
 ## Check Kubernetes environment before installation
@@ -31,6 +31,7 @@ Follow the steps below to move the Kubeflow CLI (kfctl) and set environment vari
 
 ### Move the kfctl executable from the unzipped folder to /usr/bin.
 ```bash
+$ tar -xvzf kfctl.tar.gz
 $ cp kfctl /usr/bin
 ```
 ### Set environment variables in the configuration files (`.bashrc, .bash_profile, .profile`) that exist for each user account of the operating system. In this document, environment variables are set as follows.

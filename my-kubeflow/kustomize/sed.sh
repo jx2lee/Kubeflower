@@ -13,6 +13,7 @@ sed -i "s/@@DOCKER_REGISTRY@@/${registry}/g" ./api-service/base/deployment.yaml
 sed -i "s/@@DOCKER_REGISTRY@@/${registry}/g" ./application/base/stateful-set.yaml
 sed -i "s/@@DOCKER_REGISTRY@@/${registry}/g" ./application/overlays/debug/stateful-set.yaml
 sed -i "s/@@DOCKER_REGISTRY@@/${registry}/g" ./argo/base/deployment.yaml
+sed -i "s/@@DOCKER_REGISTRY@@/${registry}/g" ./argo/base/params.env
 sed -i "s/@@DOCKER_REGISTRY@@/${registry}/g" ./bootstrap/base/stateful-set.yaml
 sed -i "s/@@DOCKER_REGISTRY@@/${registry}/g" ./centraldashboard/base/deployment.yaml
 sed -i "s/@@DOCKER_REGISTRY@@/${registry}/g" ./istio-install/base/istio-noauth.yaml
@@ -23,6 +24,7 @@ sed -i "s/@@DOCKER_REGISTRY@@/${registry}/g" ./katib-controller/base/katib-db-de
 sed -i "s/@@DOCKER_REGISTRY@@/${registry}/g" ./katib-controller/base/katib-manager-deployment.yaml
 sed -i "s/@@DOCKER_REGISTRY@@/${registry}/g" ./katib-controller/base/katib-ui-deployment.yaml
 sed -i "s/@@DOCKER_REGISTRY@@/${registry}/g" ./katib-controller/base/trial-template-configmap.yaml
+sed -i "s/@@DOCKER_REGISTRY@@/${registry}/g" ./kfserving-0.2.2.yaml
 sed -i "s/@@DOCKER_REGISTRY@@/${registry}/g" ./kfserving-install/base/statefulset.yaml
 sed -i "s/@@DOCKER_REGISTRY@@/${registry}/g" ./knative-install/base/deployment.yaml
 sed -i "s/@@DOCKER_REGISTRY@@/${registry}/g" ./knative-install/base/image.yaml

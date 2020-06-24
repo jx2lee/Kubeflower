@@ -50,6 +50,7 @@ function delete_resource_kubeflow(){
     kubectl delete clusterrolebinding application-controller-cluster-role-binding meta-controller-cluster-role-binding argo argo-ui centraldashboard admission-webhook-bootstrap-cluster-role-binding admission-webhook-cluster-role-binding jupyter-web-app-cluster-role-binding notebook-controller-role-binding pytorch-operator custom-metrics:system:auth-delegator hpa-controller-custom-metrics kfserving-proxy-rolebinding spartakus tf-job-operator katib-controller katib-ui ml-pipeline-persistenceagent pipeline-runner ml-pipeline-viewer-crd-role-binding ml-pipeline-scheduledworkflow profiles-cluster-role-binding seldon-operator-manager-rolebinding
     kubectl delete crd profiles.kubeflow.org &
     kubectl patch crd/profiles.kubeflow.org -p '{"metadata":{"finalizers":[]}}' --type=merge
+    kubectl delete crd seldondeployments.machinelearning.seldon.io
     kubectl delete customresourcedefinitions viewers.kubeflow.org
 }
 

@@ -110,5 +110,14 @@ No resources found.
 $ ./clean-kubeflow.sh
 ```
 
+## History
+
+**ver0.2**  
+- Add Image for kfserving-system
+- Add `my-kubeflow/kustomize/kfserving-0.2.2.yaml`
+- Modify `kustomize/argo/base/params.env`
+- Modify `utils/clean-kubeflow.sh`
+
+
 ---
 made by *jaejun.lee*

@@ -1,12 +1,12 @@
 #!/bin/bash
-# Fri, 18.05.2020
+# Fri, 24.06.2020
 # jaejun.lee.1991@gmail.com
 
 registry=
 
 function check_env() {
   if [ $(docker images | awk '{print $2}' | grep "<none>" | wc -l) -ne 0 ];then
-    echo "You should delete image having <none> tag! exists $(docker images | awk '{print $2}' | grep "<none>" | wc -l) <none> tag image.."
+    echo "[ERROR] You should delete image having <none> tag! exists $(docker images | awk '{print $2}' | grep "<none>" | wc -l) <none> tag image.."
     exit 1
   fi
 
@@ -35,7 +35,7 @@ function pull_images() {
       imageId=$(docker images | grep $name | awk '{print $3}')
       echo "[ IMAGE-ID] $imageId" | grep "IMAGE_ID" --color
       docker tag $imageId ${name}:${version}
-      docker save $repo > "./tars/${repo##*/}.tar"
+      docker save ${name}:${version} > "./tars/${repo##*/}.tar"
       docker rmi -f $imageId
   done
 
@@ -61,8 +61,8 @@ function push_images() {
     version=${repo##*:}
     echo "[PUSH IMAGE] $repo" | grep "PUSH IMAGE" --color
     docker load < "./tars/${repo##*/}.tar"
-    imageId=$(docker images | grep "<none>" | awk '{print $3}')
-    docker tag ${imageId} ${registry}/${name}:${version}
+    imageId=$(docker images | grep $name | awk '{print $3}')
+    docker tag ${name}:${version} ${registry}/${name}:${version}
     docker push ${registry}/${name}:${version}
     docker rmi -f ${imageId}
 done

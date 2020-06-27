@@ -25,7 +25,7 @@ function clean_resources_kubeflow(){
   for ns in ${ns_list[*]}
   do
     kubectl delete namespace $ns 2>/dev/null
-    echo "[INFO] Delete Namespace $ns" | grep "[INFO]" --color
+    echo "[INFO] Delete Namespace $ns" | grep '[INFO]' --color
   done
 }
 

@@ -26,29 +26,13 @@ csi-cephfs-sc rook-ceph.cephfs.csi.ceph.com 6d18h
 rook-ceph-block (default) rook-ceph.rbd.csi.ceph.com 6d18h
 ```
 
-## Kubeflow preferences
-Follow the steps below to move the Kubeflow CLI (kfctl) and set environment variables.
-
-### Move the kfctl executable from the unzipped folder to /usr/bin.
+### Set Config
+In folder, You must set the config `kubeflow.config`  
 ```bash
-$ tar -xvzf kfctl.tar.gz
-$ cp kfctl /usr/bin
+$ cat kubeflow.config
+docker_registry= #private docker registry address, ex)192.168.179.185:5000
+KF_NAME=my-kubeflow #default, can be modified.
 ```
-### Set environment variables in the configuration files (`.bashrc, .bash_profile, .profile`) that exist for each user account of the operating system. In this document, environment variables are set as follows.
-
-```bash
-$ vi ~ /.bashrc
-# .bashrc
-export KF_NAME=my-kubeflow #Can be modified.
-export BASE_DIR=/root/kubeflow #Can be modified
-export KF_DIR=${BASE_DIR}/${KF_NAME}
-export CONFIG_FILE=${KF_DIR}/kfctl_k8s_istio.0.7.1.yaml
-```
-> *(Note)*
-> * `KF_NAME`: Name of the Kubeflow deployment, specifying a custom deployment name.
-> * `BASE_DIR`: Path to the extracted Kubeflow directory.
-> * `KF_DIR`: Full path to Kubeflow application directory.
-> * `CONFIG_FILE`: Configuration YAML file to be used to deploy Kubeflow.
 
 ## (optional) Push image needed to install kubeflow
 Push the image tar needed for Kubeflow installation in the private docker registry. Access the `imageLoader` executable file in` $BASE_DIR/images/imageLoader` and add a registry.  
@@ -63,51 +47,36 @@ $ ./imageLoader push
 ```
 > *For more information, check the contents of [https://github.com/jx2lee/kubeflow-image-loader](https://github.com/jx2lee/kubeflow-image-loader).*
 
-## Kubeflow deployment
-Follow the steps below to modify and deploy the YAML file in $KF_DIR(`/root/kubeflow/my-kubeflow`).
+## Install Kubeflow
+Follow the steps below to use `installer.sh`
 
-### kfctl_k8s_istio.0.7.1.yaml file fix
-Access to vim and change the `uri: {BASE_DIR}` part to path with the `$ echo $BASE_DIR` command.  
+### Build
 ```bash
-$ vi my-kubeflow/kfctl_k8s_istio.0.7.1.yaml
-#kfctl_k8s_istio.0.7.1.yaml
-...
-...
--name: manifests
-  #uri: https://github.com/kubeflow/manifests/archive/v0.7-branch.tar.gz
-  uri: $ {BASE_DIR}/v0.7-branch.tar.gz # modify {BASE_DIR}
-version: v0.7.1
+$ ./installer.sh build
+```
+Then, Check the folder `${KF_NAME}`.  
+```bash
+$ ls -alF ./my_kubeflow
+-rwxr-xr-x  1 root root 6678 Jun 27 17:03 kfctl_k8s_istio.0.7.1.yaml*
+drwxr-xr-x 39 root root 4096 Jun 27 17:04 kustomize/
 ```
 
-### Use the sed.sh script in the `$KF_DIR/kustomize` folder to change the image name required for installation.
+### Deploy
 ```bash
-$ ./sed.sh {registry IP}:{registry Port}
+$ ./installer.sh deploy
 ```
-
-### Kubeflow distribution using kfctl
-`$ kfctl apply -V -f ${CONFIG_FILE}`
-  
-## Confirm Kubeflow startup
-### `http://{NODE_IP}:31380` After connecting, check if Namespaces creation screen appears.
-If the Namespace creation screen does not appear, delete the `.cache` folder in the `${KF_DIR}`directory and reinstall it with the command `$ kfctl apply -V -f ${CONFIG_FILE}`.
 
 ## Delete Kubeflow
 
-To delete Kubeflow, use the `kfctl delete` command below.  
+To delete Kubeflow, use `installer.sh`.  
 ```bash
-$ cd ${KF_DIR}
-$ kfctl delete -f ${CONFIG_FILE}
+$ ./installer.sh remove
 ```
 
 - After executing the command, check if all resources in the namespace have been deleted.  
 ```bash
 $ kubectl get all -n kubeflow
 No resources found.
-```
-
-- Delete all installed Kubeflow related resources using the clean-kubeflow.sh executable file in` ${BASE_DIR}/utils`.
-```bash
-$ ./clean-kubeflow.sh
 ```
 
 ## History
@@ -117,6 +86,16 @@ $ ./clean-kubeflow.sh
 - Add `my-kubeflow/kustomize/kfserving-0.2.2.yaml`
 - Modify `kustomize/argo/base/params.env`
 - Modify `utils/clean-kubeflow.sh`
+
+**ver0.3**  
+- Add folder `lib`/`template`/`utils`
+- `installer.sh`
+  - `build`: make yaml using `kubeflow.config`
+    - `kubeflow.config`
+      - docker_registry: private registry
+      - KF_NAME: kubeflow name *(Can be modified)*
+  - `deploy`: install kubeflow
+  - `remove`: uninstall kubeflow
 
 
 ---

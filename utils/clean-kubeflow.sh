@@ -25,7 +25,7 @@ function clean_resources_kubeflow(){
   for ns in ${ns_list[*]}
   do
     kubectl delete namespace $ns 2>/dev/null
-    echo "[INFO] Delete Namespace $ns" | grep '[INFO]' --color
+    echo "[INFO] Delete namespace $ns" | grep '[INFO]' --color
   done
 }
 
@@ -38,7 +38,7 @@ function clean_kfserving_system_ns(){
   kubectl delete clusterrolebinding.rbac.authorization.k8s.io/kfserving-proxy-rolebinding -n kfserving-system
   kubectl delete clusterrole.rbac.authorization.k8s.io/kfserving-proxy-role -n kfserving-system
   kubectl delete customresourcedefinition.apiextensions.k8s.io/inferenceservices.serving.kubeflow.org
-  kubectl delete namespace kfserving-system
+  kubectl delete namespace kfserving-system &
 }
 
 function clean_istio_system_ns(){
@@ -73,7 +73,7 @@ function clean_istio_system_ns(){
     redisquotas.config.istio.io reportnothings.config.istio.io rules.config.istio.io serviceentries.networking.istio.io servicerolebindings.rbac.istio.io \
     serviceroles.rbac.istio.io sidecars.networking.istio.io signalfxs.config.istio.io solarwindses.config.istio.io stackdrivers.config.istio.io statsds.config.istio.io \
     stdios.config.istio.io templates.config.istio.io tracespans.config.istio.io virtualservices.networking.istio.io zipkins.config.istio.io
-  kubectl delete namespace istio-system
+  kubectl delete namespace istio-system &
 }
 
 function clean_knative_serving_ns(){
@@ -96,7 +96,7 @@ function clean_knative_serving_ns(){
     configurations.serving.knative.dev images.caching.internal.knative.dev ingresses.networking.internal.knative.dev metrics.autoscaling.internal.knative.dev \
     podautoscalers.autoscaling.internal.knative.dev revisions.serving.knative.dev serverlessservices.networking.internal.knative.dev services.serving.knative.dev
   kubectl delete apiservice v1alpha1.serving.knative.dev v1beta1.custom.metrics.k8s.io
-  kubectl delete namespace knative-serving
+  kubectl delete namespace knative-serving &
 }
 
 

@@ -27,7 +27,7 @@ function set_env() {
     echo "export CONFIG_FILE=${CONFIG_FILE}" >> $HOME/.bashrc
     source $HOME/.bashrc
 
-    tar -xvzf ${lib_path}/kfctl.tar.gz -C ${install_dir}
+    tar -xvzf ${lib_path}/kfctl.tar.gz -C ${install_dir} 1>/dev/null
     cp kfctl /usr/bin 2>/dev/null && rm -f ${install_dir}/kfctl
 
     mkdir -p ${KF_DIR}

@@ -35,17 +35,7 @@ KF_NAME=my-kubeflow #default, can be modified.
 ```
 
 ## (optional) Push image needed to install kubeflow
-Push the image tar needed for Kubeflow installation in the private docker registry. Access the `imageLoader` executable file in` $BASE_DIR/images/imageLoader` and add a registry.  
-
-> Note: **When executing the push command, there must be no image with the image tag `<none>` through docker images.**
-```bash
-$ cd $BASE_DIR/images/imageLoader
-$ vi imageLoader
-$ tar -xvf images.tar
-#registry={registry_ip}:{registry_port}
-$ ./imageLoader push
-```
-> *For more information, check the contents of [https://github.com/jx2lee/kubeflow-image-loader](https://github.com/jx2lee/kubeflow-image-loader).*
+Push the image tar needed for Kubeflow installation in the private docker registry. check the contents of [https://github.com/jx2lee/kubeflow-image-loader](https://github.com/jx2lee/kubeflow-image-loader).
 
 ## Install Kubeflow
 Follow the steps below to use `installer.sh`

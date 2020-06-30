@@ -52,6 +52,7 @@ function set_env() {
     sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/katib-controller/base/trial-template-configmap.yaml
     sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/kfserving-0.2.2.yaml
     sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/kfserving-install/base/statefulset.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/knative-install/base/config-map.yaml
     sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/knative-install/base/deployment.yaml
     sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/knative-install/base/image.yaml
     sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/metacontroller/base/stateful-set.yaml

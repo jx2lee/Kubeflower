@@ -62,7 +62,7 @@ function delete_namespace(){
     kubectl proxy &
     sleep 5s
     kubectl get namespace ${ns} -o json |jq '.spec = {"finalizers":[]}' > temp.json
-    curl -k -H "Content-Type: application/json" -X PUT --data-binary @temp.json 127.0.0.1:8001/a
+    curl -k -H "Content-Type: application/json" -X PUT --data-binary @temp.json 127.0.0.1:8001/api/v1/namespaces/$ns/finalize
     rm temp.json && kill %1
     echo "clean namespace : $ns"
 }

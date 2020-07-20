@@ -24,7 +24,7 @@ When entering the `$ kubectl get storageclass` or `$ kubectl get sc` command, ch
 Storageclass exists, but if there is no "(default)" mark, define the default storage class with the following command.  
 
 ```bash
-$ kubectl patch storageclass {Storage class name} -p '{"metadata":{"annotations":{"storageclass.kubernetes.iis-default-class":"true"}}}'
+$ kubectl patch storageclass {Storage class name} -p '{"metadata":{"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 $ kubectl get storageclass
 NAME PROVISIONER AGE
 csi-cephfs-sc rook-ceph.cephfs.csi.ceph.com 6d18h

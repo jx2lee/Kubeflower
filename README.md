@@ -32,13 +32,8 @@ rook-ceph-block (default) rook-ceph.rbd.csi.ceph.com 6d18h
 ```
 
 ### Set Config
-<<<<<<< HEAD
 
 In folder, You must set the config `kubeflow.config`  
-
-=======
-In folder, You must set the config `kubeflow.config`  
->>>>>>> 21e9bb6... ver0.3
 ```bash
 $ cat kubeflow.config
 docker_registry= #private docker registry address, ex)192.168.179.185:5000
@@ -61,7 +56,6 @@ Follow the steps to use `installer.sh`
 $ ./installer.sh build
 ```
 
-<<<<<<< HEAD
 Then, Check the folder `${KF_NAME}`.  
 
 ```bash
@@ -105,13 +99,11 @@ To delete Kubeflow, use `installer.sh`.
 ```bash
 $ ./installer.sh remove
 ```
->>>>>>> 21e9bb6... ver0.3
 
 ```bash
 $ ./installer.sh remove
 ```
 
-<<<<<<< HEAD
 - After executing the command, check if all resources in the namespace have been deleted.  
   
   ```bash
@@ -119,8 +111,6 @@ $ ./installer.sh remove
   No resources found.
   ```
 
-=======
->>>>>>> 21e9bb6... ver0.3
 ## History
 
 **ver0.2**  
@@ -131,7 +121,6 @@ $ ./installer.sh remove
 - Modify `utils/clean-kubeflow.sh`
 
 **ver0.3**  
-<<<<<<< HEAD
 
 - Add folder `lib`/`template`/`utils`
 - `installer.sh`
@@ -163,4 +152,3 @@ made by *jaejun.lee*
 
 ---
 made by *jaejun.lee*
->>>>>>> 21e9bb6... ver0.3

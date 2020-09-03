@@ -1,6 +1,5 @@
 #!/bin/bash
 #Thu, 03.09.2020
-#Sat, 27.06.2020
 #jaejun.lee.1991@gmail.com
 
 install_dir=$(pwd -P)
@@ -38,7 +37,6 @@ function set_env() {
     source $HOME/.bashrc
 
     tar -xvzf ${lib_path}/kfctl.tar.gz -C ${install_dir} 1>/dev/null
-    tar -xvzf ${lib_path}/kfctl.tar.gz -C ${install_dir}
     cp kfctl /usr/bin 2>/dev/null && rm -f ${install_dir}/kfctl
 
     mkdir -p ${KF_DIR}

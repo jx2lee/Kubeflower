@@ -34,6 +34,7 @@ rook-ceph-block (default) rook-ceph.rbd.csi.ceph.com 6d18h
 ### Set Config
 
 In folder, You must set the config `kubeflow.config`  
+
 ```bash
 $ cat kubeflow.config
 docker_registry= #private docker registry address, ex)192.168.179.185:5000
@@ -73,32 +74,6 @@ $ ./installer.sh deploy
 ## Delete Kubeflow
 
 To delete Kubeflow, use `installer.sh`.  
-=======
-## Install Kubeflow
-Follow the steps below to use `installer.sh`
-
-### Build
-```bash
-$ ./installer.sh build
-```
-Then, Check the folder `${KF_NAME}`.  
-```bash
-$ ls -alF ./my_kubeflow
--rwxr-xr-x  1 root root 6678 Jun 27 17:03 kfctl_k8s_istio.0.7.1.yaml*
-drwxr-xr-x 39 root root 4096 Jun 27 17:04 kustomize/
-```
-
-### Deploy
-```bash
-$ ./installer.sh deploy
-```
-
-## Delete Kubeflow
-
-To delete Kubeflow, use `installer.sh`.  
-```bash
-$ ./installer.sh remove
-```
 
 ```bash
 $ ./installer.sh remove
@@ -138,17 +113,4 @@ $ ./installer.sh remove
 
 ---
 
-made by *jaejun.lee*
-=======
-- Add folder `lib`/`template`/`utils`
-- `installer.sh`
-  - `build`: make yaml using `kubeflow.config`
-    - `kubeflow.config`
-      - docker_registry: private registry
-      - KF_NAME: kubeflow name *(Can be modified)*
-  - `deploy`: install kubeflow
-  - `remove`: uninstall kubeflow
-
-
----
 made by *jaejun.lee*

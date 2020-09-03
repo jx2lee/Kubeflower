@@ -32,9 +32,13 @@ rook-ceph-block (default) rook-ceph.rbd.csi.ceph.com 6d18h
 ```
 
 ### Set Config
+<<<<<<< HEAD
 
 In folder, You must set the config `kubeflow.config`  
 
+=======
+In folder, You must set the config `kubeflow.config`  
+>>>>>>> 21e9bb6... ver0.3
 ```bash
 $ cat kubeflow.config
 docker_registry= #private docker registry address, ex)192.168.179.185:5000
@@ -57,6 +61,7 @@ Follow the steps to use `installer.sh`
 $ ./installer.sh build
 ```
 
+<<<<<<< HEAD
 Then, Check the folder `${KF_NAME}`.  
 
 ```bash
@@ -74,11 +79,39 @@ $ ./installer.sh deploy
 ## Delete Kubeflow
 
 To delete Kubeflow, use `installer.sh`.  
+=======
+## Install Kubeflow
+Follow the steps below to use `installer.sh`
+
+### Build
+```bash
+$ ./installer.sh build
+```
+Then, Check the folder `${KF_NAME}`.  
+```bash
+$ ls -alF ./my_kubeflow
+-rwxr-xr-x  1 root root 6678 Jun 27 17:03 kfctl_k8s_istio.0.7.1.yaml*
+drwxr-xr-x 39 root root 4096 Jun 27 17:04 kustomize/
+```
+
+### Deploy
+```bash
+$ ./installer.sh deploy
+```
+
+## Delete Kubeflow
+
+To delete Kubeflow, use `installer.sh`.  
+```bash
+$ ./installer.sh remove
+```
+>>>>>>> 21e9bb6... ver0.3
 
 ```bash
 $ ./installer.sh remove
 ```
 
+<<<<<<< HEAD
 - After executing the command, check if all resources in the namespace have been deleted.  
   
   ```bash
@@ -86,6 +119,8 @@ $ ./installer.sh remove
   No resources found.
   ```
 
+=======
+>>>>>>> 21e9bb6... ver0.3
 ## History
 
 **ver0.2**  
@@ -96,6 +131,7 @@ $ ./installer.sh remove
 - Modify `utils/clean-kubeflow.sh`
 
 **ver0.3**  
+<<<<<<< HEAD
 
 - Add folder `lib`/`template`/`utils`
 - `installer.sh`
@@ -114,3 +150,17 @@ $ ./installer.sh remove
 ---
 
 made by *jaejun.lee*
+=======
+- Add folder `lib`/`template`/`utils`
+- `installer.sh`
+  - `build`: make yaml using `kubeflow.config`
+    - `kubeflow.config`
+      - docker_registry: private registry
+      - KF_NAME: kubeflow name *(Can be modified)*
+  - `deploy`: install kubeflow
+  - `remove`: uninstall kubeflow
+
+
+---
+made by *jaejun.lee*
+>>>>>>> 21e9bb6... ver0.3

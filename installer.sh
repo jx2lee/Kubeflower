@@ -1,5 +1,9 @@
 #!/bin/bash
+<<<<<<< HEAD
 #Thu, 03.09.2020
+=======
+#Sat, 27.06.2020
+>>>>>>> 21e9bb6... ver0.3
 #jaejun.lee.1991@gmail.com
 
 install_dir=$(pwd -P)
@@ -14,6 +18,7 @@ CONFIG_FILE=${KF_DIR}/kfctl_k8s_istio.0.7.1.yaml
 lib_path="${install_dir}/lib"
 template_path="${install_dir}/template"
 
+<<<<<<< HEAD
 function check_storageclass_default() {
     sc_list=$(kubectl get storageclass -o custom-columns=name:.metadata.name,default:".metadata.annotations.storageclass\.kubernetes\.io/is-default-class" \
               --no-headers | grep "true" | awk '{print $1}')
@@ -23,6 +28,8 @@ function check_storageclass_default() {
     fi
 }
 
+=======
+>>>>>>> 21e9bb6... ver0.3
 function set_env() {
     if [[ -z ${docker_registry} ]]; then
         registry_endpoint=
@@ -36,7 +43,11 @@ function set_env() {
     echo "export CONFIG_FILE=${CONFIG_FILE}" >> $HOME/.bashrc
     source $HOME/.bashrc
 
+<<<<<<< HEAD
     tar -xvzf ${lib_path}/kfctl.tar.gz -C ${install_dir} 1>/dev/null
+=======
+    tar -xvzf ${lib_path}/kfctl.tar.gz -C ${install_dir}
+>>>>>>> 21e9bb6... ver0.3
     cp kfctl /usr/bin 2>/dev/null && rm -f ${install_dir}/kfctl
 
     mkdir -p ${KF_DIR}
@@ -61,7 +72,10 @@ function set_env() {
     sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/katib-controller/base/trial-template-configmap.yaml
     sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/kfserving-0.2.2.yaml
     sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/kfserving-install/base/statefulset.yaml
+<<<<<<< HEAD
     sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/knative-install/base/config-map.yaml
+=======
+>>>>>>> 21e9bb6... ver0.3
     sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/knative-install/base/deployment.yaml
     sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/knative-install/base/image.yaml
     sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/metacontroller/base/stateful-set.yaml
@@ -106,7 +120,10 @@ function main() {
     set_env
     ;;
   deploy)
+<<<<<<< HEAD
     check_storageclass_default
+=======
+>>>>>>> 21e9bb6... ver0.3
     install
     ;;
   remove)

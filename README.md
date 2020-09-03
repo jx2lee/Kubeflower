@@ -1,6 +1,6 @@
-# Kubeflow installation (Ver 0.7.1)
+# Kubeflower
 
-This is repo How to install Kubeflow in a Kubernetes.
+This is repo to install Kubeflow on the Kubernetes. Kubeflow Version is `0.7.1`.
 
 ## Check Kubernetes environment before installation
 
@@ -43,13 +43,13 @@ KF_NAME=my-kubeflow #default, can be modified.
 
 If installing through a public network, the `docker_registry` is not set.
 
-## (Optional) Push image needed to install kubeflow
+## (Optional) Push image to install kubeflow
 
-Push the image tar needed for Kubeflow installation in the private docker registry. check the contents of [https://github.com/jx2lee/kubeflow-image-loader](https://github.com/jx2lee/kubeflow-image-loader).
+Push the image tar needed for Kubeflow installation in the private docker registry. check the contents: [https://github.com/jx2lee/kubeflow-image-loader](https://github.com/jx2lee/kubeflow-image-loader).
 
 ## Install Kubeflow
 
-Follow the steps below to use `installer.sh`
+Follow the steps to use `installer.sh`
 
 ### Build
 
@@ -105,6 +105,11 @@ $ ./installer.sh remove
          - KF_NAME: kubeflow name *(Can be modified)*
    - `deploy`: install kubeflow
    - `remove`: uninstall kubeflow
+
+**ver0.4**  
+
+- Rename project name (deploy-kubeflow -> Kubeflower)
+- Add function for Checking Storageclass `default`
 
 ---
 

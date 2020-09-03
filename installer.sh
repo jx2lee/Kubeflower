@@ -1,5 +1,5 @@
 #!/bin/bash
-#Sat, 27.06.2020
+#Thu, 03.09.2020
 #jaejun.lee.1991@gmail.com
 
 install_dir=$(pwd -P)
@@ -13,6 +13,15 @@ CONFIG_FILE=${KF_DIR}/kfctl_k8s_istio.0.7.1.yaml
 
 lib_path="${install_dir}/lib"
 template_path="${install_dir}/template"
+
+function check_storageclass_default() {
+    sc_list=$(kubectl get storageclass -o custom-columns=name:.metadata.name,default:".metadata.annotations.storageclass\.kubernetes\.io/is-default-class" \
+              --no-headers | grep "true" | awk '{print $1}')
+    if [ -z $sc_list ]; then
+      echo -e "You must set StorageClass default!\nGood Bye.."
+      exit 1
+    fi
+}
 
 function set_env() {
     if [[ -z ${docker_registry} ]]; then
@@ -97,6 +106,7 @@ function main() {
     set_env
     ;;
   deploy)
+    check_storageclass_default
     install
     ;;
   remove)

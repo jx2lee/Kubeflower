@@ -90,7 +90,7 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: metadata.namespace
-        image: @@DOCKER_REGISTRY@@/argoproj/workflow-controller:v2.3.0
+        image: @@DOCKER_REGISTRY@@argoproj/workflow-controller:v2.3.0
         imagePullPolicy: IfNotPresent
         name: workflow-controller
         resources: {}

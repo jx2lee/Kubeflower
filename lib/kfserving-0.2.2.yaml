@@ -847,7 +847,7 @@ data:
   explainers: |-
     {
         "alibi": {
-            "image" : "@@DOCKER_REGISTRY@@/gcr.io/kfserving/alibi-explainer",
+            "image" : "@@DOCKER_REGISTRY@@gcr.io/kfserving/alibi-explainer",
             "defaultImageVersion": "0.2.2",
             "allowedImageVersions": [
                "0.2.2"
@@ -861,7 +861,7 @@ data:
     }
   logger: |-
     {
-        "image" : "@@DOCKER_REGISTRY@@/gcr.io/kfserving/logger:0.2.2",
+        "image" : "@@DOCKER_REGISTRY@@gcr.io/kfserving/logger:0.2.2",
         "memoryRequest": "100Mi",
         "memoryLimit": "1Gi",
         "cpuRequest": "100m",
@@ -870,7 +870,7 @@ data:
   predictors: |-
     {
         "tensorflow": {
-            "image": "@@DOCKER_REGISTRY@@/tensorflow/serving",
+            "image": "@@DOCKER_REGISTRY@@tensorflow/serving",
             "defaultImageVersion": "1.14.0",
             "defaultGpuImageVersion": "1.14.0-gpu",
             "allowedImageVersions": [
@@ -885,35 +885,35 @@ data:
             ]
         },
         "onnx": {
-            "image": "@@DOCKER_REGISTRY@@/mcr.microsoft.com/onnxruntime/server",
+            "image": "@@DOCKER_REGISTRY@@mcr.microsoft.com/onnxruntime/server",
             "defaultImageVersion": "v0.5.1",
             "allowedImageVersions": [
                "v0.5.1"
             ]
         },
         "sklearn": {
-            "image": "@@DOCKER_REGISTRY@@/gcr.io/kfserving/sklearnserver",
+            "image": "@@DOCKER_REGISTRY@@gcr.io/kfserving/sklearnserver",
             "defaultImageVersion": "0.2.2",
             "allowedImageVersions": [
                "0.2.2"
             ]
         },
         "xgboost": {
-            "image": "@@DOCKER_REGISTRY@@/gcr.io/kfserving/xgbserver",
+            "image": "@@DOCKER_REGISTRY@@gcr.io/kfserving/xgbserver",
             "defaultImageVersion": "0.2.2",
             "allowedImageVersions": [
                "0.2.2"
             ]
         },
         "pytorch": {
-            "image": "@@DOCKER_REGISTRY@@/gcr.io/kfserving/pytorchserver",
+            "image": "@@DOCKER_REGISTRY@@gcr.io/kfserving/pytorchserver",
             "defaultImageVersion": "0.2.2",
             "allowedImageVersions": [
                "0.2.2"
             ]
         },
         "tensorrt": {
-            "image": "@@DOCKER_REGISTRY@@/nvcr.io/nvidia/tensorrtserver",
+            "image": "@@DOCKER_REGISTRY@@nvcr.io/nvidia/tensorrtserver",
             "defaultImageVersion": "19.05-py3",
             "allowedImageVersions": [
                "19.05-py3"
@@ -922,7 +922,7 @@ data:
     }
   storageInitializer: |-
     {
-        "image" : "@@DOCKER_REGISTRY@@/gcr.io/kfserving/storage-initializer:0.2.2",
+        "image" : "@@DOCKER_REGISTRY@@gcr.io/kfserving/storage-initializer:0.2.2",
         "memoryRequest": "100Mi",
         "memoryLimit": "1Gi",
         "cpuRequest": "100m",
@@ -1004,7 +1004,7 @@ spec:
         - --upstream=http://127.0.0.1:8080/
         - --logtostderr=true
         - --v=10
-        image: @@DOCKER_REGISTRY@@/gcr.io/kubebuilder/kube-rbac-proxy:v0.4.0
+        image: @@DOCKER_REGISTRY@@gcr.io/kubebuilder/kube-rbac-proxy:v0.4.0
         name: kube-rbac-proxy
         ports:
         - containerPort: 8443
@@ -1020,7 +1020,7 @@ spec:
               fieldPath: metadata.namespace
         - name: SECRET_NAME
           value: kfserving-webhook-server-secret
-        image: @@DOCKER_REGISTRY@@/gcr.io/kfserving/kfserving-controller:0.2.2
+        image: @@DOCKER_REGISTRY@@gcr.io/kfserving/kfserving-controller:0.2.2
         imagePullPolicy: Always
         name: manager
         ports:

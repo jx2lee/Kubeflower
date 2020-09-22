@@ -64,6 +64,8 @@ $ ls -alF ./my_kubeflow
 -rwxr-xr-x  1 root root 6678 Jun 27 17:03 kfctl_k8s_istio.0.7.1.yaml*
 drwxr-xr-x 39 root root 4096 Jun 27 17:04 kustomize/
 ```
+> **NOTICE:**
+> * If your k8s cluster version is higher than 1.15, copy `/lib/seldondeployments.machinelearning.seldon.io-crd.yaml` to `$KF_DIR/kustomize/seldon-core-operator/base` After `build` command.
 
 ### Deploy
 

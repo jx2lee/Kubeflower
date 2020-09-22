@@ -23,6 +23,95 @@ function check_storageclass_default() {
     fi
 }
 
+function sed_private_registry() {
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/api-service/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/application/base/stateful-set.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/application/overlays/debug/stateful-set.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/argo/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/argo/base/params.env
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/bootstrap/base/stateful-set.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/centraldashboard/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/istio-install/base/istio-noauth.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/jupyter-web-app/base/config-map.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/jupyter-web-app/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/katib-controller/base/katib-controller-deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/katib-controller/base/katib-db-deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/katib-controller/base/katib-manager-deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/katib-controller/base/katib-ui-deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/katib-controller/base/trial-template-configmap.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/kfserving-0.2.2.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/kfserving-install/base/statefulset.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/knative-install/base/config-map.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/knative-install/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/knative-install/base/image.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/metacontroller/base/stateful-set.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/metadata/base/metadata-db-deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/metadata/base/metadata-deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/metadata/base/metadata-envoy-deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/metadata/base/metadata-ui-deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/minio/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/mysql/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/notebook-controller/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/persistent-agent/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/pipeline-visualization-service/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/pipelines-ui/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/pipelines-viewer/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/profiles/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/profiles/overlays/debug/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/pytorch-operator/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/scheduledworkflow/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/seldon-core-operator/base/seldon-operator-controller-manager-statefulset.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/spartakus/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/tensorboard/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/tf-job-operator/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}\//g" ${KF_DIR}/kustomize/webhook/base/deployment.yaml
+}
+
+function sed_public_registry() {
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/api-service/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/application/base/stateful-set.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/application/overlays/debug/stateful-set.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/argo/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/argo/base/params.env
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/bootstrap/base/stateful-set.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/centraldashboard/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/istio-install/base/istio-noauth.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/jupyter-web-app/base/config-map.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/jupyter-web-app/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/katib-controller/base/katib-controller-deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/katib-controller/base/katib-db-deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/katib-controller/base/katib-manager-deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/katib-controller/base/katib-ui-deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/katib-controller/base/trial-template-configmap.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/kfserving-0.2.2.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/kfserving-install/base/statefulset.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/knative-install/base/config-map.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/knative-install/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/knative-install/base/image.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/metacontroller/base/stateful-set.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/metadata/base/metadata-db-deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/metadata/base/metadata-deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/metadata/base/metadata-envoy-deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/metadata/base/metadata-ui-deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/minio/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/mysql/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/notebook-controller/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/persistent-agent/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/pipeline-visualization-service/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/pipelines-ui/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/pipelines-viewer/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/profiles/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/profiles/overlays/debug/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/pytorch-operator/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/scheduledworkflow/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/seldon-core-operator/base/seldon-operator-controller-manager-statefulset.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/spartakus/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/tensorboard/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/tf-job-operator/base/deployment.yaml
+    sed -i "s/@@DOCKER_REGISTRY@@//g" ${KF_DIR}/kustomize/webhook/base/deployment.yaml
+
+}
+
 function set_env() {
     if [[ -z ${docker_registry} ]]; then
         registry_endpoint=
@@ -44,47 +133,11 @@ function set_env() {
     cp ${lib_path}/kfserving-0.2.2.yaml ${KF_DIR}/kustomize
 
     sed -i "s|@@DIR@@|${lib_path}|g" ${CONFIG_FILE}
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/api-service/base/deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/application/base/stateful-set.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/application/overlays/debug/stateful-set.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/argo/base/deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/argo/base/params.env
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/bootstrap/base/stateful-set.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/centraldashboard/base/deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/istio-install/base/istio-noauth.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/jupyter-web-app/base/config-map.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/jupyter-web-app/base/deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/katib-controller/base/katib-controller-deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/katib-controller/base/katib-db-deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/katib-controller/base/katib-manager-deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/katib-controller/base/katib-ui-deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/katib-controller/base/trial-template-configmap.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/kfserving-0.2.2.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/kfserving-install/base/statefulset.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/knative-install/base/config-map.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/knative-install/base/deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/knative-install/base/image.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/metacontroller/base/stateful-set.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/metadata/base/metadata-db-deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/metadata/base/metadata-deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/metadata/base/metadata-envoy-deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/metadata/base/metadata-ui-deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/minio/base/deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/mysql/base/deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/notebook-controller/base/deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/persistent-agent/base/deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/pipeline-visualization-service/base/deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/pipelines-ui/base/deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/pipelines-viewer/base/deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/profiles/base/deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/profiles/overlays/debug/deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/pytorch-operator/base/deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/scheduledworkflow/base/deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/seldon-core-operator/base/seldon-operator-controller-manager-statefulset.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/spartakus/base/deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/tensorboard/base/deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/tf-job-operator/base/deployment.yaml
-    sed -i "s/@@DOCKER_REGISTRY@@/${registry_endpoint}/g" ${KF_DIR}/kustomize/webhook/base/deployment.yaml
+    if [ -z ${registry_endpoint} ]; then
+	sed_public_registry
+    else 
+        sed_private_registry
+    fi
 }
 
 function install() {

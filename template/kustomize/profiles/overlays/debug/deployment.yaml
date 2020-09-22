@@ -15,7 +15,7 @@ spec:
             configMapKeyRef:
               name: parameters
               key: project
-        image: @@DOCKER_REGISTRY@@/gcr.io/kubeflow-images-public/profile-controller:e601b2226e534a4f8e0722cfc44ae4a919a90265c4c6c9e7a7a55fcb57032f25 
+        image: @@DOCKER_REGISTRY@@gcr.io/kubeflow-images-public/profile-controller:e601b2226e534a4f8e0722cfc44ae4a919a90265c4c6c9e7a7a55fcb57032f25 
         ports:
         - containerPort: 2345
         securityContext:

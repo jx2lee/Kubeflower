@@ -23,7 +23,7 @@ spec:
         - --upstream=http://127.0.0.1:8080/
         - --logtostderr=true
         - --v=10
-        image: @@DOCKER_REGISTRY@@/gcr.io/kubebuilder/kube-rbac-proxy:v0.4.0
+        image: @@DOCKER_REGISTRY@@gcr.io/kubebuilder/kube-rbac-proxy:v0.4.0
         name: kube-rbac-proxy
         ports:
         - containerPort: 8443
@@ -41,7 +41,7 @@ spec:
           value: kfserving-webhook-server-secret
         - name: ENABLE_WEBHOOK_NAMESPACE_SELECTOR
           value: enabled
-        image: @@DOCKER_REGISTRY@@/gcr.io/kfserving/kfserving-controller:0.2.2
+        image: @@DOCKER_REGISTRY@@gcr.io/kfserving/kfserving-controller:0.2.2
         imagePullPolicy: Always
         name: manager
         ports:

@@ -16,7 +16,7 @@ spec:
       - name: manager
         command:
         - /root/manager
-        image: @@DOCKER_REGISTRY@@/gcr.io/kubeflow-images-public/kubernetes-sigs/application:1.0-beta
+        image: @@DOCKER_REGISTRY@@gcr.io/kubeflow-images-public/kubernetes-sigs/application:1.0-beta
         imagePullPolicy: Always
         env:
         - name: project

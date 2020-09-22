@@ -6,5 +6,5 @@ metadata:
   name: queue-proxy
   namespace: knative-serving
 spec:
-  image: @@DOCKER_REGISTRY@@/gcr.io/knative-releases/knative.dev/serving/cmd/queue:e0654305370cf3bbbd0f56f97789c92cf5215f752b70902eba5d5fc0e88c5aca
+  image: @@DOCKER_REGISTRY@@gcr.io/knative-releases/knative.dev/serving/cmd/queue:e0654305370cf3bbbd0f56f97789c92cf5215f752b70902eba5d5fc0e88c5aca
 

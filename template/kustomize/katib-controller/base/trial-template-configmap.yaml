@@ -14,7 +14,7 @@ data:
         spec:
           containers:
           - name: {{.Trial}}
-            image: @@DOCKER_REGISTRY@@/docker.io/katib/mxnet-mnist-example
+            image: @@DOCKER_REGISTRY@@docker.io/katib/mxnet-mnist-example
             command:
             - "python"
             - "/mxnet/example/image-classification/train_mnist.py"

@@ -21,7 +21,7 @@ spec:
         - --logtostderr
         - -v=4
         - --discovery-interval=20s
-        image: @@DOCKER_REGISTRY@@/metacontroller/metacontroller:v0.3.0
+        image: @@DOCKER_REGISTRY@@metacontroller/metacontroller:v0.3.0
         imagePullPolicy: Always
         name: metacontroller
         ports:

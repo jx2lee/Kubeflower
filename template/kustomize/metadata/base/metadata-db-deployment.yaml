@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: db-container
-        image: @@DOCKER_REGISTRY@@/mysql:8.0.3
+        image: @@DOCKER_REGISTRY@@mysql:8.0.3
         args:
         - --datadir
         - /var/lib/mysql/datadir

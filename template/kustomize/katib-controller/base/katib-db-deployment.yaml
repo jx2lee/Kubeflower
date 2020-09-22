@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: katib-db
-        image: @@DOCKER_REGISTRY@@/mysql:8
+        image: @@DOCKER_REGISTRY@@mysql:8
         args:
         - --datadir
         - /var/lib/mysql/datadir

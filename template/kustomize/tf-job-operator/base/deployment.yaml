@@ -25,6 +25,6 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-        image: @@DOCKER_REGISTRY@@/gcr.io/kubeflow-images-public/tf_operator:kubeflow-tf-operator-postsubmit-v1-5adee6f-6109-a25c
+        image: @@DOCKER_REGISTRY@@gcr.io/kubeflow-images-public/tf_operator:kubeflow-tf-operator-postsubmit-v1-5adee6f-6109-a25c
         name: tf-job-operator
       serviceAccountName: tf-job-operator

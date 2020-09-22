@@ -64,7 +64,7 @@ spec:
           value: "true"
         - name: ISTIO_GATEWAY
           value: kubeflow-gateway
-        image: @@DOCKER_REGISTRY@@/docker.io/seldonio/seldon-core-operator:0.4.1
+        image: @@DOCKER_REGISTRY@@docker.io/seldonio/seldon-core-operator:0.4.1
         imagePullPolicy: Always
         name: manager
         ports:

@@ -16,6 +16,6 @@ spec:
         - volunteer
         - --cluster-id=$(usageId)
         - --database=https://stats-collector.kubeflow.org
-        image: @@DOCKER_REGISTRY@@/gcr.io/google_containers/spartakus-amd64:v1.1.0
+        image: @@DOCKER_REGISTRY@@gcr.io/google_containers/spartakus-amd64:v1.1.0
         name: volunteer
       serviceAccountName: spartakus

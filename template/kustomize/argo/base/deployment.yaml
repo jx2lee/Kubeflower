@@ -35,7 +35,7 @@ spec:
           value: "true"
         - name: BASE_HREF
           value: /argo/
-        image: @@DOCKER_REGISTRY@@/argoproj/argoui:v2.3.0
+        image: @@DOCKER_REGISTRY@@argoproj/argoui:v2.3.0
         imagePullPolicy: IfNotPresent
         name: argo-ui
         resources: {}
